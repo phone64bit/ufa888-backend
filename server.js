@@ -22,7 +22,13 @@ connectDB();
 //Cookie Parser
 app.use(cookieParser());
 
-app.use(cors());
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+
+app.use(cors(corsOptions));
 
 app.use("/api/v1/hotels", hotels);
 app.use("/api/v1/auth", auth);
