@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 // Route files
 const hotels = require("./routes/hotels");
@@ -20,6 +21,8 @@ connectDB();
 
 //Cookie Parser
 app.use(cookieParser());
+
+app.use(cors());
 
 app.use("/api/v1/hotels", hotels);
 app.use("/api/v1/auth", auth);
