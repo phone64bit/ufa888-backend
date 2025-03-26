@@ -23,7 +23,7 @@ connectDB();
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "https://ufa888-project.vercel.app"
+    origin: "https://ufa888-project.vercel.app/*"
 }))
 
 app.use("/api/v1/hotels", hotels);
