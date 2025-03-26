@@ -2,7 +2,6 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
 
 // Route files
 const hotels = require("./routes/hotels");
@@ -22,13 +21,15 @@ connectDB();
 //Cookie Parser
 app.use(cookieParser());
 
-const corsOptions ={
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200,
- }
+// CORS middleware
+const allowCrossDomain = (req, res, next) => {
+    res.header(`Access-Control-Allow-Origin`, `${process.env.FRONTEND_URL}`);
+    res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+    res.header(`Access-Control-Allow-Headers`, `Content-Type`);
+    next();
+};
 
-app.use(cors(corsOptions));
+app.use(allowCrossDomain);
 
 app.use("/api/v1/hotels", hotels);
 app.use("/api/v1/auth", auth);
